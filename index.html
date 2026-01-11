@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tazzie Rowe - Editorial Home</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8c30e8",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#191121",
+                        "text-dark": "#140e1b",
+                        "text-light": "#faf8fc",
+                        "pastel-pink": "#ffd6e0",
+                        "pastel-blue": "#d6e5ff",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Soft blobs animation/styling */
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            z-index: 0;
+            opacity: 0.4;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-dark dark:text-text-light transition-colors duration-300">
+<!-- Background Elements -->
+<div class="fixed inset-0 overflow-hidden pointer-events-none">
+<div class="blob bg-pastel-pink dark:bg-primary/20 w-[500px] h-[500px] top-[-100px] left-[-100px]"></div>
+<div class="blob bg-pastel-blue dark:bg-blue-900/20 w-[600px] h-[600px] bottom-[10%] right-[-150px]"></div>
+</div>
+<div class="relative z-10 flex flex-col min-h-screen">
+<!-- Navigation -->
+<header class="sticky top-0 z-50 w-full backdrop-blur-md bg-background-light/80 dark:bg-background-dark/80 border-b border-[#ede7f3] transition-all duration-300">
+    <div class="max-w-[1440px] mx-auto px-6 lg:px-12 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-4">
+            <!-- Logo Mark -->
+            <div class="size-8 rounded-full bg-primary text-white flex items-center justify-center font-serif italic text-xl">
+                T
+            </div>
+            <h2 class="text-2xl font-serif font-bold tracking-tight text-[#140e1b] dark:text-white">Tazzie Rowe</h2>
+        </div>
+        <nav class="hidden md:flex items-center gap-10">
+            <a href="#" class="text-sm font-semibold uppercase tracking-widest hover:text-primary transition-colors">Home</a>
+            <a href="about.html#about" class="text-sm font-semibold uppercase tracking-widest hover:text-primary transition-colors">About</a>
+            <a href="#journal" class="text-sm font-semibold uppercase tracking-widest hover:text-primary transition-colors">Journal</a>
+            <a href="#contact" class="text-sm font-semibold uppercase tracking-widest hover:text-primary transition-colors">Contact</a>
+        </nav>
+        <div class="md:hidden">
+            <button id="mobile-menu-btn" class="p-2 text-[#140e1b] dark:text-white">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+        </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-[#ede7f3] p-6 flex flex-col gap-6 text-center shadow-xl">
+        <a href="#" class="text-lg font-serif font-bold text-[#140e1b] dark:text-white hover:text-primary transition-colors">Home</a>
+        <a href="about.html" class="text-lg font-serif font-bold text-[#140e1b] dark:text-white hover:text-primary transition-colors">About</a>
+        <a href="#journal" class="text-lg font-serif font-bold text-[#140e1b] dark:text-white hover:text-primary transition-colors">Journal</a>
+        <a href="#contact" class="text-lg font-serif font-bold text-[#140e1b] dark:text-white hover:text-primary transition-colors">Contact</a>
+    </div>
+</header>
+<script>
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = menuBtn.querySelector('span');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.textContent = 'menu';
+            } else {
+                icon.textContent = 'close';
+            }
+        });
+    }
+
+    function copyToClipboard(btn) {
+        const url = 'http://thefreewebsitewizards.com/';
+        const icon = btn.querySelector('span');
+        
+        const showSuccess = () => {
+            icon.textContent = 'check_circle';
+            icon.classList.add('text-green-500');
+            setTimeout(() => {
+                icon.textContent = 'content_copy';
+                icon.classList.remove('text-green-500');
+            }, 2000);
+        };
+
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(url).then(showSuccess).catch(fallback);
+        } else {
+            fallback();
+        }
+
+        function fallback() {
+            const textArea = document.createElement("textarea");
+            textArea.value = url;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showSuccess();
+            } catch (e) {
+                console.error('Copy failed', e);
+                alert('Failed to copy URL');
+            }
+            document.body.removeChild(textArea);
+        }
+    }
+</script>
+<!-- Hero Section -->
+<section class="flex-grow flex flex-col items-center justify-center pt-16 pb-24 px-6 relative">
+<div class="max-w-4xl mx-auto text-center z-10">
+<div class="mb-8 relative inline-block">
+<!-- Decorative star element -->
+<span class="material-symbols-outlined absolute -top-8 -right-8 text-primary/40 text-5xl animate-pulse">spark</span>
+<h1 class="font-serif text-6xl md:text-8xl font-medium leading-tight tracking-tight text-text-dark dark:text-white">
+                        Hey, I’m <span class="italic text-primary/90">Tazzie</span>
+</h1>
+</div>
+<p class="max-w-lg mx-auto text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed font-light mb-10">
+                    Curating a life of wellness, storytelling, and honest living. 
+                    Exploring the beauty in the everyday mundane.
+                </p>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <button onclick="document.getElementById('journal').scrollIntoView({behavior: 'smooth'});" class="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-full font-bold transition-all shadow-lg hover:shadow-primary/30 flex items-center gap-2">
+                        <span>Explore the Journal</span>
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </button>
+                    <button onclick="window.location.href='about.html'" class="px-8 py-3 rounded-full font-medium border border-gray-200 dark:border-gray-700 hover:border-primary/50 hover:text-primary transition-all bg-white/50 dark:bg-black/20 backdrop-blur-sm">
+                        Get to know me
+                    </button>
+                </div>
+</div>
+<!-- Hero Image (Centered overlap style) -->
+<div class="mt-16 w-full max-w-5xl mx-auto px-4">
+<div class="relative aspect-[21/9] md:aspect-[3/1] w-full overflow-hidden rounded-2xl shadow-xl">
+<div class="absolute inset-0 bg-cover bg-center bg-no-repeat transform hover:scale-105 transition-transform duration-700" data-alt="Serene mountain landscape with lake" style='background-image: url("https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070&auto=format&fit=crop");'>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+</div>
+</div>
+</section>
+<!-- Masonry About Section -->
+    <section id="journal" class="py-20 px-6 md:px-12 lg:px-20 bg-white/60 dark:bg-black/20 backdrop-blur-sm">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col items-center mb-16">
+<span class="text-primary text-sm font-bold tracking-widest uppercase mb-2">My Journey</span>
+<h2 class="font-serif text-4xl md:text-5xl font-medium text-center text-text-dark dark:text-white">Life in Chapters</h2>
+</div>
+<!-- Masonry Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-min">
+<!-- Column 1 -->
+<div class="flex flex-col gap-8">
+<!-- Text Block: 365 Challenge -->
+<div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4">
+<span class="material-symbols-outlined">calendar_month</span>
+</div>
+<h3 class="font-serif text-2xl mb-3 text-text-dark dark:text-white">The 365-Day Challenge</h3>
+<p class="text-gray-600 dark:text-gray-300 leading-relaxed text-sm">
+                            A commitment to daily creation and storytelling. Every single day for a year, I showed up to write, photograph, and share. It taught me discipline, but more importantly, it taught me that imperfect creation is better than perfect silence.
+                        </p>
+                        <a href="about.html#challenge" class="inline-flex items-center gap-1 mt-4 text-primary font-bold text-sm hover:underline">
+                            Read the reflections <span class="material-symbols-outlined text-sm">arrow_outward</span>
+                        </a>
+                    </div>
+<!-- Image Tile: Portrait -->
+<div class="relative aspect-[3/4] rounded-xl overflow-hidden group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Woman holding a camera in a sunlit field" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA-75K-kPTIe0qHAl857zgRRr4KEKVHEzRksSYyfZWeEAJGeA4oLcwqDn0iMAW0C7h050XBmUV4Un_awYpC5mMmcjOrZGNL1yVzkjWjezleWlhq6kv76eDFjycQmpobmJ0D3PGUjPawitVdJRlSF5mauW9H9nM7E4S4WyBWNt3mGj4RepXB1c_1GKgTHDWbt5OR8kxPmlsAmF6MTdE3Mow0HALAiyFkqO3YGanj0GG6QGGrUtWYHXVgYBoh59u6YT9kOz4Zzisvsw");'></div>
+<div class="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors"></div>
+</div>
+</div>
+<!-- Column 2 (Offset on large screens for masonry feel) -->
+<div class="flex flex-col gap-8 lg:mt-12">
+<!-- Image Tile: Food -->
+<div class="relative aspect-square rounded-xl overflow-hidden group shadow-md">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Healthy colorful salad bowl overhead shot" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCWJaGq4F5ZCPngqIJWQEstCQW1JMIrePpbj14OfF0ejm8OFsUqSvQy1d83yrl-4wiUr1DDHBL174VU8w59gJxgQVUXuzOvcpYOoAdBwkHt4061hawy8C0KB6sX1qw6iMejzuh-HlmJDza1DItZsZFj4SgFBtkUNsSR_yZSjbB2hbLXQ4zuQyPLVLpzSIdByaQUJ9Bg9rLxxwq0o9pjBmvad6qLIbNSjKXg-v6GYBT-b5T9QbP19TEQlsBu-M7US34uO9zoMQS2Fw");'></div>
+<div class="absolute bottom-4 left-4 bg-white/90 dark:bg-black/80 backdrop-blur px-3 py-1 rounded text-xs font-bold uppercase tracking-wide">Wellness</div>
+</div>
+<!-- Text Block: Plant Based -->
+<div class="bg-primary/5 dark:bg-primary/10 p-8 rounded-xl border border-primary/10 relative overflow-hidden">
+<!-- Background decoration -->
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-primary/10 text-9xl">eco</span>
+<h3 class="font-serif text-2xl mb-3 text-text-dark dark:text-white relative z-10">Plant-Based &amp; Coeliac</h3>
+<p class="text-gray-600 dark:text-gray-300 leading-relaxed text-sm relative z-10">
+                                Navigating a plant-based, coeliac lifestyle wasn't just a diet change—it was a health necessity. I share my favorite gluten-free recipes, restaurant guides, and how I fuel my body with intention without sacrificing joy or flavor.
+                            </p>
+</div>
+</div>
+<!-- Column 3 -->
+<div class="flex flex-col gap-8">
+<!-- Text Block: Travel -->
+<div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow">
+<div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-300 mb-4">
+<span class="material-symbols-outlined">flight_takeoff</span>
+</div>
+<h3 class="font-serif text-2xl mb-3 text-text-dark dark:text-white">Travel as Healing</h3>
+<p class="text-gray-600 dark:text-gray-300 leading-relaxed text-sm">
+                                Finding peace and restoration in new places. Travel isn't just about the destination; it's about the perspective shift. From slow mornings in Paris to hiking in the Dolomites, I document how stepping away brings me back to myself.
+                            </p>
+</div>
+<!-- Image Tile: Landscape -->
+<div class="relative aspect-[4/5] rounded-xl overflow-hidden group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Misty mountain landscape with calm lake" data-location="Dolomites, Italy" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBAFpvOYz7ouQ4Qv71AZikKy_3A4hPokknZs365-vS1c_VqHjhyjIZPhoxdaLTnhS4STJY5oefO2QUsgoOp2btaPVDYt__N8QjhvGDb6seYd8IyUx2heyAuygs6mOeLCW-7JP4lvaZbFrAcHhEVkRZ1voeIOu6IxwJwj8G07grI7FVO7YCYgRtscBgG_K1HFoK3MXoTKnLcFqWCzLA0f1pGqwPkQZMN047Aaka9w7K5BxWNkYRcwuDzupnHEnHeVpREt0cAycQgkQ");'></div>
+<!-- Location badge -->
+<div class="absolute top-4 right-4 bg-black/40 backdrop-blur text-white px-3 py-1 rounded-full text-xs flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+                                Dolomites
+                            </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Me Card -->
+<section id="contact" class="py-20 px-6">
+    <div class="max-w-3xl mx-auto text-center bg-white dark:bg-gray-800 p-10 md:p-14 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 relative overflow-hidden">
+        <!-- Abstract blob inside card -->
+        <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-pastel-pink via-primary to-pastel-blue"></div>
+        
+        <h2 class="font-serif text-3xl md:text-4xl font-medium mb-4 text-text-dark dark:text-white">Get in Touch</h2>
+        <p class="text-gray-600 dark:text-gray-300 mb-10 max-w-md mx-auto leading-relaxed">
+            Whether you have a collaboration in mind or just want to say hello, I'd love to hear from you.
+        </p>
+
+        <div class="flex flex-wrap justify-center gap-6">
+            <!-- Email Option -->
+            <a href="mailto:hello@tazzierowe.com" class="group flex flex-col items-center gap-3 p-6 w-32 rounded-xl bg-gray-50 dark:bg-gray-700/50 hover:bg-pastel-pink/20 dark:hover:bg-primary/20 transition-all duration-300 border border-transparent hover:border-pastel-pink dark:hover:border-primary/50">
+                <div class="w-12 h-12 rounded-full bg-white dark:bg-gray-800 shadow-sm flex items-center justify-center text-gray-700 dark:text-gray-200 group-hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined">mail</span>
+                </div>
+                <span class="text-sm font-bold text-gray-700 dark:text-gray-200 group-hover:text-primary">Email</span>
+            </a>
+
+            <!-- Instagram Option -->
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center gap-3 p-6 w-32 rounded-xl bg-gray-50 dark:bg-gray-700/50 hover:bg-pastel-pink/20 dark:hover:bg-primary/20 transition-all duration-300 border border-transparent hover:border-pastel-pink dark:hover:border-primary/50">
+                <div class="w-12 h-12 rounded-full bg-white dark:bg-gray-800 shadow-sm flex items-center justify-center text-gray-700 dark:text-gray-200 group-hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined">photo_camera</span>
+                </div>
+                <span class="text-sm font-bold text-gray-700 dark:text-gray-200 group-hover:text-primary">Instagram</span>
+            </a>
+
+            <!-- WhatsApp Option -->
+            <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center gap-3 p-6 w-32 rounded-xl bg-gray-50 dark:bg-gray-700/50 hover:bg-pastel-pink/20 dark:hover:bg-primary/20 transition-all duration-300 border border-transparent hover:border-pastel-pink dark:hover:border-primary/50">
+                <div class="w-12 h-12 rounded-full bg-white dark:bg-gray-800 shadow-sm flex items-center justify-center text-gray-700 dark:text-gray-200 group-hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined">chat</span>
+                </div>
+                <span class="text-sm font-bold text-gray-700 dark:text-gray-200 group-hover:text-primary">WhatsApp</span>
+            </a>
+        </div>
+        
+        <p class="text-xs text-gray-400 mt-10">
+            Based in the mountains, available worldwide.
+        </p>
+    </div>
+</section>
+<!-- Footer -->
+<footer class="mt-auto border-t border-gray-200 dark:border-gray-800 bg-white/50 dark:bg-black/20">
+<div class="max-w-7xl mx-auto px-6 py-12 flex flex-col items-center">
+<div class="flex gap-6 mb-8">
+<a href="#" onclick="event.preventDefault(); alert('Social link clicked!');" class="text-gray-500 hover:text-primary transition-colors p-2 bg-white dark:bg-gray-800 rounded-full shadow-sm">
+<!-- Custom SVG for brand consistency if needed, using material icons for simplicity here -->
+<span class="material-symbols-outlined">photo_camera</span>
+</a>
+<a href="#" onclick="event.preventDefault(); alert('Social link clicked!');" class="text-gray-500 hover:text-primary transition-colors p-2 bg-white dark:bg-gray-800 rounded-full shadow-sm">
+<span class="material-symbols-outlined">auto_awesome</span>
+</a>
+<a href="#" onclick="event.preventDefault(); alert('Social link clicked!');" class="text-gray-500 hover:text-primary transition-colors p-2 bg-white dark:bg-gray-800 rounded-full shadow-sm">
+<span class="material-symbols-outlined">mail</span>
+</a>
+</div>
+<div class="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-8 text-sm text-gray-600 dark:text-gray-400 font-medium">
+<a href="#journal" class="hover:text-primary">Journal</a>
+<a href="about.html" class="hover:text-primary">About</a>
+<a href="about.html#recipes" class="hover:text-primary">Wellness</a>
+<a href="#contact" class="hover:text-primary">Contact</a>
+<a href="#contact" class="hover:text-primary">Press</a>
+</div>
+<p class="text-gray-400 text-sm">© 2023 Tazzie Rowe. All rights reserved.</p>
+        <div class="mt-4 flex items-center gap-2 text-sm text-gray-400">
+            <span>Made by: <a href="http://thefreewebsitewizards.com/" target="_blank" class="hover:text-primary transition-colors font-medium">The Free websites</a></span>
+            <button onclick="copyToClipboard(this)" class="p-1 hover:text-primary transition-colors" title="Copy page URL">
+                <span class="material-symbols-outlined text-sm">content_copy</span>
+            </button>
+        </div>
+    </div>
+</footer>
+</div>
+</body></html>

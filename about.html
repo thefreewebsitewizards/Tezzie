@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+
+<html class="light scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tazzie Rowe - Wellness Creator</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#8c30e8",
+              "background-light": "#f7f6f8",
+              "background-dark": "#191121",
+              "pastel-mint": "#e0f2f1",
+              "pastel-lilac": "#f3e5f5",
+            },
+            fontFamily: {
+              "display": ["Manrope", "sans-serif"],
+              "serif": ["Playfair Display", "serif"],
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        /* Custom scrollbar for editorial feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f7f6f8;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af;
+        }
+        
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#140e1b] dark:text-white antialiased font-display overflow-x-hidden selection:bg-pastel-lilac selection:text-primary">
+<div class="relative flex flex-col min-h-screen w-full">
+<!-- Sticky Header -->
+<header class="sticky top-0 z-50 w-full backdrop-blur-md bg-background-light/80 dark:bg-background-dark/80 border-b border-[#ede7f3] transition-all duration-300">
+<div class="max-w-[1440px] mx-auto px-6 lg:px-12 py-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<!-- Logo Mark -->
+<div class="size-8 rounded-full bg-primary text-white flex items-center justify-center font-serif italic text-xl">
+                        T
+                    </div>
+<h2 class="text-2xl font-serif font-bold tracking-tight text-[#140e1b] dark:text-white">Tazzie Rowe</h2>
+</div>
+<nav class="hidden md:flex items-center gap-10">
+<a class="text-sm font-semibold uppercase tracking-widest hover:text-primary transition-colors" href="index.html">Home</a>
+<a class="text-sm font-semibold uppercase tracking-widest hover:text-primary transition-colors" href="#about">About</a>
+<a class="text-sm font-semibold uppercase tracking-widest hover:text-primary transition-colors" href="index.html#journal">Journal</a>
+<a class="text-sm font-semibold uppercase tracking-widest hover:text-primary transition-colors" href="#contact">Contact</a>
+</nav>
+<div class="md:hidden">
+<button id="mobile-menu-btn" class="p-2 text-[#140e1b] dark:text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-[#ede7f3] p-6 flex flex-col gap-6 text-center shadow-xl">
+<a class="text-lg font-serif font-bold text-[#140e1b] dark:text-white hover:text-primary transition-colors" href="index.html">Home</a>
+<a class="text-lg font-serif font-bold text-[#140e1b] dark:text-white hover:text-primary transition-colors" href="#">About</a>
+<a class="text-lg font-serif font-bold text-[#140e1b] dark:text-white hover:text-primary transition-colors" href="index.html#journal">Journal</a>
+<a class="text-lg font-serif font-bold text-[#140e1b] dark:text-white hover:text-primary transition-colors" href="#contact">Contact</a>
+</div>
+</header>
+<script>
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = menuBtn.querySelector('span');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.textContent = 'menu';
+            } else {
+                icon.textContent = 'close';
+            }
+        });
+    }
+
+    function copyToClipboard(btn) {
+        const url = 'http://thefreewebsitewizards.com/';
+        const icon = btn.querySelector('span');
+        
+        const showSuccess = () => {
+            icon.textContent = 'check_circle';
+            icon.classList.add('text-green-500');
+            setTimeout(() => {
+                icon.textContent = 'content_copy';
+                icon.classList.remove('text-green-500');
+            }, 2000);
+        };
+
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(url).then(showSuccess).catch(fallback);
+        } else {
+            fallback();
+        }
+
+        function fallback() {
+            const textArea = document.createElement("textarea");
+            textArea.value = url;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showSuccess();
+            } catch (e) {
+                console.error('Copy failed', e);
+                alert('Failed to copy URL');
+            }
+            document.body.removeChild(textArea);
+        }
+    }
+</script>
+<!-- Main Content Wrapper -->
+<main class="flex-1 w-full max-w-[1440px] mx-auto flex flex-col">
+<!-- Hero Section: Split Layout -->
+<section class="relative w-full min-h-[85vh] grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-12 overflow-hidden">
+<!-- Left: Image -->
+<div class="relative h-[60vh] lg:h-auto w-full order-1 lg:order-1 overflow-hidden group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="High-quality lifestyle portrait of a woman looking confident" style="background-image: url('https://placehold.co/800x1200/e2e8f0/1e293b?text=Portrait');">
+</div>
+<!-- Decorative pastel shape -->
+<div class="absolute -bottom-20 -right-20 w-64 h-64 bg-pastel-mint/80 rounded-full blur-3xl opacity-60 mix-blend-multiply dark:mix-blend-overlay"></div>
+</div>
+<!-- Right: Editorial Content -->
+<div class="relative flex flex-col justify-center px-6 py-12 lg:px-16 lg:py-20 order-2 lg:order-2 bg-background-light dark:bg-background-dark">
+<!-- Background blobs -->
+<div class="absolute top-10 right-10 w-48 h-48 bg-pastel-lilac rounded-full blur-3xl opacity-50 z-0"></div>
+<div class="relative z-10 flex flex-col gap-6 max-w-lg">
+<span class="text-primary font-bold tracking-widest uppercase text-xs">Wellness &amp; Lifestyle</span>
+<h1 class="text-5xl md:text-7xl lg:text-[5.5rem] font-serif font-medium leading-[1.1] tracking-tight text-[#140e1b] dark:text-white">
+                            Hey, <br/>
+<span class="italic text-primary/80">I’m Tazzie.</span>
+</h1>
+<div class="h-px w-24 bg-[#140e1b] dark:bg-white my-2"></div>
+<h2 class="text-xl md:text-2xl font-serif text-[#140e1b]/80 dark:text-white/80 leading-relaxed">
+                            Wellness Creator &amp; Storyteller based in the mountains.
+                        </h2>
+<p class="text-base text-gray-600 dark:text-gray-300 leading-relaxed max-w-md">
+                            Curating a life of intention through daily practice, sustainable living, and honest conversation.
+                        </p>
+                        <div class="pt-6">
+                            <button onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'});" class="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-[#140e1b] dark:bg-white px-8 py-4 text-white dark:text-[#140e1b] transition-all hover:bg-primary hover:text-white dark:hover:bg-primary dark:hover:text-white">
+                                <span class="font-bold tracking-wide text-sm uppercase">Read My Story</span>
+                                <span class="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1">arrow_forward</span>
+                            </button>
+                        </div>
+</div>
+</div>
+</section>
+<!-- Pull Quote Section -->
+<section class="py-20 px-6 lg:px-24">
+<div class="max-w-4xl mx-auto text-center relative">
+<span class="material-symbols-outlined absolute -top-8 -left-4 lg:-left-12 text-6xl text-pastel-lilac opacity-50 rotate-180">format_quote</span>
+<h2 class="text-3xl md:text-4xl lg:text-5xl font-serif font-medium italic leading-tight text-[#140e1b] dark:text-white">
+                        “I’ve always believed that the most powerful stories come from lived experience, rooted in vulnerability.”
+                    </h2>
+<span class="material-symbols-outlined absolute -bottom-8 -right-4 lg:-right-12 text-6xl text-pastel-mint opacity-50">format_quote</span>
+</div>
+</section>
+<!-- Magazine Layout: About / Features -->
+<section class="px-6 lg:px-12 py-12 pb-24" id="about">
+<div class="flex flex-col gap-12">
+<!-- Section Intro -->
+<div class="flex flex-col lg:flex-row gap-8 lg:items-end lg:justify-between border-b border-gray-200 dark:border-gray-800 pb-8">
+<div class="max-w-2xl">
+<h3 class="text-primary font-bold uppercase tracking-widest text-sm mb-3">The Journey</h3>
+<h2 class="text-4xl md:text-5xl font-serif font-bold text-[#140e1b] dark:text-white leading-tight">
+                                From 365 Days of Change to a Life of Purpose
+                            </h2>
+</div>
+<p class="max-w-md text-gray-600 dark:text-gray-300 text-lg leading-relaxed font-serif italic">
+                            My journey is built on three core pillars: consistency, nourishment, and exploration.
+                        </p>
+</div>
+<!-- Asymmetrical Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
+<!-- Block 1: The Challenge (Mint Background) -->
+<div id="challenge" class="lg:col-span-4 bg-pastel-mint rounded-xl p-8 flex flex-col justify-between min-h-[320px] transition-transform hover:-translate-y-1 duration-300">
+<div>
+<div class="bg-white/50 w-12 h-12 rounded-full flex items-center justify-center mb-6 text-[#140e1b]">
+<span class="material-symbols-outlined">calendar_month</span>
+</div>
+<h3 class="text-2xl font-serif font-bold text-[#140e1b] mb-3">The 365-Day Challenge</h3>
+<p class="text-[#140e1b]/80 leading-relaxed">
+                                    A commitment to daily growth. What started as a simple promise to show up for myself turned into a year of radical transformation and resilience.
+                                </p>
+</div>
+<a class="inline-flex items-center gap-2 text-primary font-bold mt-6 hover:underline" href="index.html#journal">
+                                Read the archive <span class="material-symbols-outlined text-sm">arrow_outward</span>
+</a>
+</div>
+<!-- Block 2: Image Card -->
+<div class="lg:col-span-4 relative h-[320px] lg:h-auto rounded-xl overflow-hidden group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="Close up of healthy green plant leaves in sunlight" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAUXfIP_tWzj6ZVVVucM9exFmP4KNyrzcn_F5vSnT_kre0pbXoemDLr_TXvThEZzElO9Z6baNHlmyS07uKkqx8fvv98Wbe6wgholtVJlnFpSgo_ROm-eqB-uqygRN7HIY3vFfC0RfU59gWQ7vpjt4umIDC4Cag7q4bx1OQaCQV1dx_4W4jAUG4012IRLtWvi6buQ9yGvY-_rpyuz5QBdregwQHwADTlQczuz7_Noq6-0fiA16OqWolWvOgvbr0v3wcWRP-Da6UsLQ');">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-6 left-6 text-white">
+<span class="uppercase tracking-widest text-xs font-bold mb-1 block">Philosophy</span>
+<h3 class="text-2xl font-serif">Growth isn't linear.</h3>
+</div>
+</div>
+<!-- Block 3: Plant-Based Living (Lilac Background) -->
+<div class="lg:col-span-4 bg-pastel-lilac rounded-xl p-8 flex flex-col justify-between min-h-[320px] transition-transform hover:-translate-y-1 duration-300">
+<div>
+<div class="bg-white/50 w-12 h-12 rounded-full flex items-center justify-center mb-6 text-[#140e1b]">
+<span class="material-symbols-outlined">nutrition</span>
+</div>
+<h3 class="text-2xl font-serif font-bold text-[#140e1b] mb-3">Plant-Based Living</h3>
+<p class="text-[#140e1b]/80 leading-relaxed">
+                                    Nourishing the body with intention. Discovering the vibrant world of whole foods and making sustainable choices that honor the earth.
+                                </p>
+</div>
+<a class="inline-flex items-center gap-2 text-primary font-bold mt-6 hover:underline" href="#">
+                                Browse recipes <span class="material-symbols-outlined text-sm">arrow_outward</span>
+</a>
+</div>
+<!-- Block 4: Travel (Wide) -->
+<div class="lg:col-span-8 bg-white dark:bg-neutral-800 border border-gray-100 dark:border-neutral-700 rounded-xl p-8 lg:p-12 flex flex-col md:flex-row gap-8 items-center">
+<div class="flex-1">
+<div class="bg-gray-100 dark:bg-neutral-700 w-12 h-12 rounded-full flex items-center justify-center mb-6 text-[#140e1b] dark:text-white">
+<span class="material-symbols-outlined">public</span>
+</div>
+<h3 class="text-3xl font-serif font-bold text-[#140e1b] dark:text-white mb-4">Travel Philosophy</h3>
+<p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
+                                    Exploring the world isn't just about seeing new places; it's about finding stories in the quiet corners. My travel guides focus on slow living, local culture, and hidden gems that often go unnoticed.
+                                </p>
+<button onclick="window.location.href='index.html#journal'" class="px-6 py-3 rounded-lg border border-gray-300 dark:border-neutral-600 hover:border-primary hover:text-primary dark:hover:text-primary dark:hover:border-primary transition-colors font-bold text-sm uppercase tracking-wide">
+                                    View Travel Journals
+                                </button>
+</div>
+<div class="w-full md:w-1/2 h-64 rounded-lg bg-cover bg-center" data-alt="Scenic landscape of a desert road trip at sunset" data-location="Joshua Tree, CA" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCaM13uqt2YVmdYTNeGPip74X4e_qDWDKVEUX8h-fVObaPH47aO-US4xtTmkoPUkPKlq9ryclOEFttk7sLaZEezhsRJI5-PpoPNCwqSGe4a_roHTYRmTxSG7x3Ru_Uj0bENxYJXhaLVQEDt66NH4DbrwCXusylDXLZWMF6K0VItp_1L9AXOvdwZqv0cWmZf9aACjh0TX1NLFAUI3uIy1HLuNlqHxg2rdawoeu33jpXrQZpPLDvazuP0WVluChaiQINGX9SD7VuVRw');">
+</div>
+</div>
+<!-- Block 5: Quote Card -->
+<div class="lg:col-span-4 bg-[#140e1b] text-white rounded-xl p-8 flex items-center justify-center text-center relative overflow-hidden">
+<div class="absolute -top-10 -right-10 w-40 h-40 bg-primary rounded-full blur-3xl opacity-30"></div>
+<div class="relative z-10">
+<p class="font-serif italic text-2xl leading-relaxed">
+                                    "Wellness is the act of practicing."
+                                </p>
+<p class="mt-4 text-sm font-bold uppercase tracking-widest text-gray-400">— Tazzie</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Me Card -->
+<section id="contact" class="px-6 lg:px-12 py-20 bg-background-light dark:bg-background-dark relative overflow-hidden">
+    <div class="absolute left-0 bottom-0 w-full h-1/2 bg-gradient-to-t from-pastel-lilac/30 to-transparent pointer-events-none"></div>
+    <div class="max-w-4xl mx-auto text-center relative z-10">
+        <h2 class="text-4xl md:text-5xl font-serif font-bold text-[#140e1b] dark:text-white mb-4">
+            Let's Connect
+        </h2>
+        <p class="text-lg text-gray-600 dark:text-gray-300 mb-10 max-w-lg mx-auto">
+            I'm always open to new stories, collaborations, and conversations. Reach out through your favorite platform.
+        </p>
+        
+        <div class="bg-white dark:bg-neutral-800 p-8 md:p-10 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 max-w-3xl mx-auto">
+            <div class="flex flex-wrap justify-center gap-8 md:gap-12">
+                <!-- Email Option -->
+                <a href="mailto:hello@tazzierowe.com" class="group flex flex-col items-center gap-4 transition-transform hover:-translate-y-1 duration-300">
+                    <div class="w-16 h-16 rounded-full bg-pastel-lilac/50 dark:bg-primary/20 flex items-center justify-center text-primary shadow-sm group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                        <span class="material-symbols-outlined text-3xl">mail</span>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="font-bold text-lg text-[#140e1b] dark:text-white mb-1">Email</h3>
+                        <span class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-primary transition-colors">Send a message</span>
+                    </div>
+                </a>
+
+                <!-- Instagram Option -->
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center gap-4 transition-transform hover:-translate-y-1 duration-300">
+                    <div class="w-16 h-16 rounded-full bg-pastel-lilac/50 dark:bg-primary/20 flex items-center justify-center text-primary shadow-sm group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                        <span class="material-symbols-outlined text-3xl">photo_camera</span>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="font-bold text-lg text-[#140e1b] dark:text-white mb-1">Instagram</h3>
+                        <span class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-primary transition-colors">Follow the journey</span>
+                    </div>
+                </a>
+
+                <!-- WhatsApp Option -->
+                <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center gap-4 transition-transform hover:-translate-y-1 duration-300">
+                    <div class="w-16 h-16 rounded-full bg-pastel-lilac/50 dark:bg-primary/20 flex items-center justify-center text-primary shadow-sm group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                        <span class="material-symbols-outlined text-3xl">chat</span>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="font-bold text-lg text-[#140e1b] dark:text-white mb-1">WhatsApp</h3>
+                        <span class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-primary transition-colors">Let's chat</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <p class="mt-8 text-xs text-gray-400 dark:text-gray-500">
+            Typically responding within 24-48 hours.
+        </p>
+    </div>
+</section>
+</main>
+<!-- Minimal Footer -->
+<footer class="mt-auto border-t border-gray-200 dark:border-gray-800 bg-white/50 dark:bg-black/20">
+<div class="max-w-7xl mx-auto px-6 py-12 flex flex-col items-center">
+<div class="flex gap-6 mb-8">
+<a href="#" onclick="event.preventDefault(); alert('Social link clicked!');" class="text-gray-500 hover:text-primary transition-colors p-2 bg-white dark:bg-gray-800 rounded-full shadow-sm">
+<!-- Custom SVG for brand consistency if needed, using material icons for simplicity here -->
+<span class="material-symbols-outlined">photo_camera</span>
+</a>
+<a href="#" onclick="event.preventDefault(); alert('Social link clicked!');" class="text-gray-500 hover:text-primary transition-colors p-2 bg-white dark:bg-gray-800 rounded-full shadow-sm">
+<span class="material-symbols-outlined">auto_awesome</span>
+</a>
+<a href="#" onclick="event.preventDefault(); alert('Social link clicked!');" class="text-gray-500 hover:text-primary transition-colors p-2 bg-white dark:bg-gray-800 rounded-full shadow-sm">
+<span class="material-symbols-outlined">mail</span>
+</a>
+</div>
+<div class="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-8 text-sm text-gray-600 dark:text-gray-400 font-medium">
+<a href="#journal" class="hover:text-primary">Journal</a>
+<a href="about.html" class="hover:text-primary">About</a>
+<a href="about.html#recipes" class="hover:text-primary">Wellness</a>
+<a href="#contact" class="hover:text-primary">Contact</a>
+<a href="#contact" class="hover:text-primary">Press</a>
+</div>
+<p class="text-gray-400 text-sm">© 2023 Tazzie Rowe. All rights reserved.</p>
+        <div class="mt-4 flex items-center gap-2 text-sm text-gray-400">
+            <span>Made by: <a href="http://thefreewebsitewizards.com/" target="_blank" class="hover:text-primary transition-colors font-medium">The Free websites</a></span>
+            <button onclick="copyToClipboard(this)" class="p-1 hover:text-primary transition-colors" title="Copy page URL">
+                <span class="material-symbols-outlined text-sm">content_copy</span>
+            </button>
+        </div>
+    </div>
+</footer>
+</div>
+</body></html>
